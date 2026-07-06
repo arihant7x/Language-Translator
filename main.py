@@ -1,5 +1,10 @@
 from src.translator import translate_text
 from src.history import save_history, load_history, clear_history
+from src.utils import (
+    validate_language,
+    SUPPORTED_LANGUAGES,
+    CODE_TO_LANGUAGE,
+)
 
 
 def main():
@@ -21,20 +26,36 @@ def main():
                 continue
 
             destination = input(
-                "Target Language (en,es,fr...): "
+                "Target Language\nType 'languages' to see all: "
             ).strip().lower()
 
             if not destination:
-                print("Error: Need a language code.")
+                print("Error: Need a language.")
                 continue
 
-            result = translate_text(text, destination)
+            if destination == "languages":
+                print()
+
+                for name, code in SUPPORTED_LANGUAGES.items():
+                    print(f"{name.capitalize()} → {code}")
+
+                continue
+
+            lang_code = validate_language(destination)
+
+            if not lang_code:
+                print(f"'{destination}' isn't a supported language.")
+                continue
+
+            lang_name = CODE_TO_LANGUAGE[lang_code].capitalize()
+
+            result = translate_text(text, lang_code)
 
             if result.startswith("Error"):
                 print(result)
                 continue
 
-            save_history(text, result, destination)
+            save_history(text, result, lang_code, lang_name)
 
             print(f"\nTranslation: {result}")
 
@@ -53,7 +74,9 @@ def main():
                     print(f"Time       : {entry['timestamp']}")
                     print(f"Original   : {entry['original']}")
                     print(f"Translated : {entry['translated']}")
-                    print(f"Target     : {entry['target']}")
+                    print(
+                        f"Language   : {entry['target_name']} ({entry['target_code']})"
+                    )
 
                 print("-" * 50)
 

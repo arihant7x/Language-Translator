@@ -17,20 +17,18 @@ def load_history():
         return []
 
 
-def save_history(original, translated, target):
+def save_history(original, translated, target_code, target_name):
     history = load_history()
-
     entry = {
         "original": original,
         "translated": translated,
-        "target": target,
+        "target_code": target_code,
+        "target_name": target_name,
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
     }
-
     history.append(entry)
-
     with open(HISTORY_FILE, "w") as f:
-        json.dump(history, f, indent=4)
+        json.dump(history, f, indent=2)
 
 
 def clear_history():
