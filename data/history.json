@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "original": "well i hope this works now",
+    "translated": "Nun, ich hoffe, das funktioniert jetzt",
+    "target_code": "de",
+    "target_name": "German",
+    "timestamp": "2026-07-14 22:34"
+  },
+  {
+    "original": "danke",
+    "translated": "Gracias",
+    "target_code": "es",
+    "target_name": "Spanish",
+    "timestamp": "2026-07-14 22:34"
+  }
+]
