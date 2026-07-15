@@ -1,5 +1,5 @@
 from src.translator import translate_text
-from src.history import save_history, load_history, clear_history
+from src.history import save_history, load_history, clear_history, export_history
 from src.utils import validate_language, SUPPORTED_LANGUAGES, CODE_TO_LANGUAGE
 from src.ui import (
     display_header,
@@ -82,6 +82,13 @@ def main():
                 print(f"  {name.capitalize()} → {code}")
 
         elif choice == "5":
+            success, message = export_history()
+            if success:
+                display_success(f"History exported to {message}")
+            else:
+                display_error(message)
+            
+        elif choice == "6":
             print("\nExiting the translator. Bye!")
             break
 

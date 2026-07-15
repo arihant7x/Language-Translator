@@ -12,7 +12,8 @@ def display_menu():
     print("2. View History")
     print("3. Clear History")
     print("4. Supported Languages")
-    print("5. Exit")
+    print("5. Export History")
+    print("6. Exit")
 
 def display_error(message):
     print(f"\n[ERROR] {message}")
